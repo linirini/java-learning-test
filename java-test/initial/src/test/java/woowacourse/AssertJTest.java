@@ -7,6 +7,8 @@ import org.junit.jupiter.api.Test;
 import java.util.List;
 
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.assertj.core.api.AssertionsForClassTypes.assertThatCode;
+import static org.assertj.core.api.AssertionsForClassTypes.assertThatThrownBy;
 import static org.junit.jupiter.api.Assertions.assertDoesNotThrow;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotEquals;
@@ -37,6 +39,7 @@ public class AssertJTest {
          * isEqualTo는 두 객체의 값을 비교할 때 사용합니다.
          * JUnit5의 `assertEquals` 메서드와 비슷한 기능을 합니다.
          * JUnit5의 `assertEquals` 메서드를 AssertJ의 `isEqualTo` 메서드로 변경해보세요.
+         * JUnit5과 같이, equals 메서드가 오버라이딩 된 타입에 대해서만 원하는 비교가 가능하다.
          */
         @Test
         @DisplayName("isEqualTo 메서드로 두 값이 같은지 비교한다")
@@ -48,7 +51,7 @@ public class AssertJTest {
             final var expected = 3;
 
             // TODO: JUnit5의 assertEquals 메서드를 AssertJ의 isEqualTo 메서드로 변경해보세요.
-            assertEquals(expected, actual);
+            assertThat(actual).isEqualTo(expected);
         }
 
         /**
@@ -63,10 +66,10 @@ public class AssertJTest {
             final var b = 2;
             final var actual = a + b;
 
-            final var unexpected = 4;
+            final var expected = 4;
 
             // TODO: JUnit5의 assertNotEquals 메서드를 AssertJ의 isNotEqualTo 메서드로 변경해보세요.
-            assertNotEquals(unexpected, actual);
+            assertThat(actual).isNotEqualTo(expected);
         }
 
         /**
@@ -80,7 +83,7 @@ public class AssertJTest {
             final Object actual = null;
 
             // TODO: JUnit5의 assertNull 메서드를 AssertJ의 isNull 메서드로 변경해보세요.
-            assertNull(actual);
+            assertThat(actual).isNull();
         }
 
         /**
@@ -94,7 +97,7 @@ public class AssertJTest {
             final Object actual = new Object();
 
             // TODO: JUnit5의 assertNotNull 메서드를 AssertJ의 isNotNull 메서드로 변경해보세요.
-            assertNotNull(actual);
+            assertThat(actual).isNotNull();
         }
 
         /**
@@ -109,7 +112,7 @@ public class AssertJTest {
             final var expected = actual;
 
             // TODO: JUnit5의 assertSame 메서드를 AssertJ의 isSameAs 메서드로 변경해보세요.
-            assertSame(expected, actual);
+            assertThat(actual).isSameAs(expected);
         }
 
         /**
@@ -121,10 +124,10 @@ public class AssertJTest {
         @DisplayName("isNotSameAs 메서드로 두 객체가 같은 객체인지 비교한다")
         void isNotSameAs_메서드로_두_객체가_같은_객체인지_비교한다() {
             final var actual = new Object();
-            final var unexpected = new Object();
+            final var expected = new Object();
 
             // TODO: JUnit5의 assertNotSame 메서드를 AssertJ의 isNotSameAs 메서드로 변경해보세요.
-            assertNotSame(unexpected, actual);
+            assertThat(actual).isNotSameAs(expected);
         }
 
         /*
@@ -150,9 +153,7 @@ public class AssertJTest {
         @DisplayName("assertThatThrownBy 메서드로 특정 예외가 발생하는지 비교한다")
         void assertThatThrownBy_메서드로_특정_예외가_발생하는지_비교한다() {
             // TODO: JUnit5의 assertThrows 메서드를 AssertJ의 assertThatThrownBy 메서드로 변경해보세요.
-            assertThrows(IllegalCallerException.class, () -> {
-                causeException();
-            });
+            assertThatThrownBy(() -> causeException());
         }
 
         /**
@@ -163,6 +164,7 @@ public class AssertJTest {
         @DisplayName("assertThatThrownBy 메서드로 특정 예외가 발생하는지 비교한다")
         void assertThatThrownBy_메서드로_특정_예외_메시지가_발생하는지_비교한다() {
             // TODO: hasMessage 메서드를 사용하여 예외 메시지까지 비교해보세요.
+            assertThatThrownBy(()->causeException()).isInstanceOf(IllegalCallerException.class).hasMessage("예외가 발생했습니다.");
             final var illegalCallerException = assertThrows(IllegalCallerException.class, this::causeException);
             if (!illegalCallerException.getMessage().contains("예외가 발생했습니다.")) {
                 throw new RuntimeException("예외 메시지가 다릅니다.");
@@ -183,11 +185,13 @@ public class AssertJTest {
     class AssertThatCodeTest {
         /**
          * JUnit5의 `assertDoesNotThrow` 메서드를 AssertJ의 `assertThatCode` 메서드로 변경해보세요.
+         * This method was not named assertThat because the java compiler reported it ambiguous when used directly with a lambda :(
          */
         @Test
         @DisplayName("assertThatCode 메서드로 특정 코드가 예외를 발생하지 않는지 비교한다")
         void assertThatCode_메서드로_특정_코드가_예외를_발생하지_않는지_비교한다() {
             // TODO: JUnit5의 assertDoesNotThrow 메서드를 AssertJ의 assertThatCode 메서드로 변경해보세요.
+            assertThatCode(() -> Integer.valueOf(0x80000000)).doesNotThrowAnyException();
             assertDoesNotThrow(() -> {
                 final var number = Integer.valueOf(0x80000000);
             });
@@ -213,7 +217,7 @@ public class AssertJTest {
             final var expected = "world";
 
             // TODO: AssertJ의 contains 메서드를 사용하여 actual에 expected가 포함되어 있는지 비교해보세요.
-            assertTrue(actual.contains(expected));
+            assertThat(actual).contains(expected);
         }
 
         /**
@@ -226,7 +230,7 @@ public class AssertJTest {
             final var expected = "Hello";
 
             // TODO: AssertJ의 startsWith 메서드를 사용하여 actual이 expected로 시작하는지 비교해보세요.
-            assertTrue(actual.startsWith(expected));
+            assertThat(actual).startsWith(expected);
         }
 
         /**
@@ -239,6 +243,7 @@ public class AssertJTest {
             final var expected = "world!";
 
             // TODO: AssertJ의 기능을 활용하여 문자열이 특정 문자열로 끝나는지 비교해보세요.
+            assertThat(actual).endsWith(expected);
         }
 
         /**
@@ -251,6 +256,7 @@ public class AssertJTest {
             final var expected = "Hello, [a-z]+!";
 
             // TODO: AssertJ의 기능을 활용하여 문자열이 정규 표현식과 일치하는지 검증해보세요.
+            assertThat(actual).containsPattern(expected);
         }
 
         /*
@@ -279,7 +285,7 @@ public class AssertJTest {
             final var expected = 3;
 
             // TODO: AssertJ의 기능을 활용하여 Collection의 크기를 비교해보세요.
-            assertEquals(expected, actual.size());
+            assertThat(actual).hasSize(expected);
         }
 
         /**
@@ -292,7 +298,7 @@ public class AssertJTest {
             final var expected = 1;
 
             // TODO: AssertJ의 기능을 활용하여 Collection에 특정 객체가 포함되어 있는지 비교해보세요.
-            assertTrue(actual.contains(expected));
+            assertThat(actual).contains(expected);
         }
 
         /**
@@ -305,8 +311,9 @@ public class AssertJTest {
             final var expected = List.of(1, 2, 3);
 
             // TODO: AssertJ의 기능을 활용하여 Collection에 특정 객체들이 포함되어 있는지 비교해보세요.
+            assertThat(actual).containsAll(expected);
             for (int i = 0, end = actual.size(); i < end; i++) {
-                assertEquals(expected.get(i), actual.get(i));
+                assertEquals(actual.get(i), expected.get(i));
             }
 
             /* ----- 아래는 추가로 학습할 분만 보세요! -----
@@ -354,8 +361,9 @@ public class AssertJTest {
             final var expected = List.of("user1", "user2", "user3");
 
             // TODO: AssertJ의 extracting 메서드를 사용하여 actual에 포함된 User 객체들 중 username 필드를 추출하여 expected와 비교해보세요.
+            assertThat(actual).extracting(user -> user.getUsername()).containsAll(expected);
             for (int i = 0, end = actual.size(); i < end; i++) {
-                assertEquals(expected.get(i), actual.get(i).getUsername());
+                assertEquals(actual.get(i).getUsername(), expected.get(i));
             }
 
             /* ----- 아래는 추가로 학습할 분만 보세요! -----
@@ -390,10 +398,8 @@ public class AssertJTest {
     void chaining_을_사용하여_여러_개의_메서드를_연속해서_사용할_수_있다() {
         final var actual = new Object();
         final var expected = actual;
-
         // TODO: AssertJ의 chaining을 사용하여 여러 개의 메서드를 연속해서 사용해보세요.
-        assertThat(actual).isNotNull();
-        assertThat(actual).isInstanceOf(Object.class);
-        assertThat(actual).isSameAs(expected);
+        //assertAll처럼 하나의 실패에서 바로 탈출이 아닌 연산을 한번에 한 후 모든 실패를 알려준다.
+        assertThat(actual).isNotNull().isInstanceOf(Object.class).isSameAs(expected);
     }
 }
