@@ -5,10 +5,7 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="3c790837-1e96-496d-b7c5-42778307cee8" name="Changes" comment="feat(clean-code): 좋은 예외 처리 학습 테스트 추가">
-      <change afterPath="$PROJECT_DIR$/.idea/dbnavigator.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/clean-code/complete/src/test/java/woowacourse/ExceptionHandlingTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/clean-code/complete/src/test/java/woowacourse/ExceptionHandlingTest.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/clean-code/initial/src/test/java/woowacourse/ExceptionHandlingTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/clean-code/initial/src/test/java/woowacourse/ExceptionHandlingTest.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -69,12 +66,16 @@
     &quot;git-widget-placeholder&quot;: &quot;main&quot;,
     &quot;jdk.selected.JAVA_MODULE&quot;: &quot;corretto-17&quot;,
     &quot;kotlin-language-version-configured&quot;: &quot;true&quot;,
-    &quot;last_opened_file_path&quot;: &quot;D:/woowacourse/java-learning-test&quot;,
+    &quot;last_opened_file_path&quot;: &quot;C:/Users/2001y/Desktop/linirinilinrin/DEV/Woowa_Tech_Course/java-learning-test&quot;,
     &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
     &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
     &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
     &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
     &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
+    &quot;project.structure.last.edited&quot;: &quot;Project&quot;,
+    &quot;project.structure.proportion&quot;: &quot;0.0&quot;,
+    &quot;project.structure.side.proportion&quot;: &quot;0.0&quot;,
+    &quot;settings.editor.selected.configurable&quot;: &quot;preferences.general&quot;,
     &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
   }
 }</component>
@@ -83,7 +84,7 @@
       <recent name="$PROJECT_DIR$" />
     </key>
   </component>
-  <component name="RunManager" selected="Gradle.SyntaxTest.하위_클래스의_예외를_먼저_처리하지_않으면_컴파일_에러가_발생한다 (1)">
+  <component name="RunManager" selected="Gradle.JUnit5Test">
     <configuration name="AssertJTest" type="GradleRunConfiguration" factoryName="Gradle" temporary="true">
       <ExternalSystemSettings>
         <option name="executionName" />
@@ -201,10 +202,10 @@
     </configuration>
     <recent_temporary>
       <list>
+        <item itemvalue="Gradle.JUnit5Test" />
         <item itemvalue="Gradle.SyntaxTest.하위_클래스의_예외를_먼저_처리하지_않으면_컴파일_에러가_발생한다 (1)" />
         <item itemvalue="Gradle.FunctionalProgrammingTest (1)" />
         <item itemvalue="Gradle.FunctionalProgrammingTest" />
-        <item itemvalue="Gradle.JUnit5Test" />
         <item itemvalue="Gradle.AssertJTest" />
       </list>
     </recent_temporary>
@@ -217,6 +218,9 @@
     </attachedChunks>
   </component>
   <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
+  <component name="SvnConfiguration">
+    <configuration>C:\Users\2001y\AppData\Roaming\Subversion</configuration>
+  </component>
   <component name="TaskManager">
     <task active="true" id="Default" summary="Default task">
       <changelist id="3c790837-1e96-496d-b7c5-42778307cee8" name="Changes" comment="" />
@@ -231,6 +235,9 @@
       <workItem from="1708571348972" duration="319000" />
       <workItem from="1708575072465" duration="317000" />
       <workItem from="1708923718679" duration="766000" />
+      <workItem from="1708934003738" duration="501000" />
+      <workItem from="1708934533725" duration="7000" />
+      <workItem from="1708934592812" duration="10000" />
     </task>
     <task id="LOCAL-00001" summary="feat(test): junit, assertj 학습 테스트 추가">
       <option name="closed" value="true" />
@@ -278,5 +285,9 @@
     <MESSAGE value="feat(language): 함수형 프로그래밍 학습 테스트 추가" />
     <MESSAGE value="feat(clean-code): 좋은 예외 처리 학습 테스트 추가" />
     <option name="LAST_COMMIT_MESSAGE" value="feat(clean-code): 좋은 예외 처리 학습 테스트 추가" />
+  </component>
+  <component name="XSLT-Support.FileAssociations.UIState">
+    <expand />
+    <select />
   </component>
 </project>
