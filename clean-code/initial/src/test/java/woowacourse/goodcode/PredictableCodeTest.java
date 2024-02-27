@@ -32,6 +32,7 @@ public class PredictableCodeTest {
     @DisplayName("어떻게 매번 -1를 체크하지 않도록 할 수 있을까?")
     void 어떻게_매번_값을_체크하지_않도록_할_수_있을까() {
         // TODO: 매번 -1을 체크하지 않고 참여자가 없다는 것을 명시적으로 표현할 수 있는 코드를 작성해보세요.
+        // SOLUTION : null을 반환하여 의도를 전달하자.
         class RacingGame {
             private static final int NO_PARTICIPANT = -1;
 
@@ -45,12 +46,17 @@ public class PredictableCodeTest {
                 this.participants = participants;
             }
 
-            int averagePosition() {
+            //int averagePosition() {
+            Integer averagePosition() {
                 // Note: 매직값은 버그를 유발할 수 있다.
-                return (int) participants.stream()
+                final OptionalDouble average = participants.stream()
                         .mapToInt(Car::position)
-                        .average()
-                        .orElse(NO_PARTICIPANT);
+                        .average();
+                //.orElse(NO_PARTICIPANT);
+                if (average.isEmpty()) {
+                    return null;
+                }
+                return (int) average.getAsDouble();
             }
         }
 
@@ -58,7 +64,8 @@ public class PredictableCodeTest {
 
         final var averagePosition = racingGame.averagePosition();
 
-        assertThat(averagePosition).isEqualTo(RacingGame.NO_PARTICIPANT);
+        //assertThat(averagePosition).isEqualTo(RacingGame.NO_PARTICIPANT);
+        assertThat(averagePosition).isNull();
     }
 
     /**
@@ -71,6 +78,7 @@ public class PredictableCodeTest {
     @DisplayName("null을 사용하지 않고 의도를 전달하는 방법은 무엇일까?")
     void null을_사용하지_않고_의도를_전달하는_방법은_무엇일까() {
         // TODO: null을 사용하지 않고 참여자가 없다는 것을 명시적으로 표현할 수 있는 코드를 작성해보세요.
+        // SOLUTION : Optional의 empty() 메서드를 활용하여 비어있는 인스턴스임을 알리자.
         class RacingGame {
             private final List<Car> participants;
 
@@ -82,16 +90,19 @@ public class PredictableCodeTest {
                 this.participants = participants;
             }
 
-            Integer averagePosition() {
+            Optional<Integer> averagePosition() {
                 final OptionalDouble average = participants.stream()
                         .mapToInt(Car::position)
                         .average();
 
                 if (average.isEmpty()) {
                     // Note: null은 버그를 유발할 수 있다.
-                    return null;
+                    //return null;
+                    //public static<T> Optional<T> empty() : Returns an empty Optional instance. No value is present for this Optional.
+                    return Optional.empty();
                 }
-                return (int) average.getAsDouble();
+                //public static <T> Optional<T> of(T value) : Returns an Optional describing the given non-null value.
+                return Optional.of((int) average.getAsDouble());
             }
         }
 
@@ -99,13 +110,15 @@ public class PredictableCodeTest {
 
         final var averagePosition = racingGame.averagePosition();
 
-        assertThat(averagePosition).isNull();
+        //assertThat(averagePosition).isNull();
+        assertThat(averagePosition).isEmpty();
     }
 
     /**
      * Optional을 통해 의도를 전달하는 방법입니다.
      * Optional을 사용하면 코드를 읽는 사람이 해당 변수가 비어있을 수 있다는 것을 알 수 있습니다.
      * 지금의 구조는 참여자가 없다는 사실을 전달할 수 있지만, 그 처리를 외부에 위임하고 있습니다.
+     * -> 응집도 저하!!
      * 만약 참여자가 없다는 사실을 처리하는 코드가 여러군데에 중복되어 있다면, 이는 유지보수성을 떨어뜨리는 코드가 됩니다.
      * 어떻게 참여자가 없는 상황을 처리하는 코드를 중복하지 않고 처리할 수 있을까?
      */
@@ -113,6 +126,7 @@ public class PredictableCodeTest {
     @DisplayName("어떻게 참여자가 없는 상황을 처리하는 코드를 중복하지 않고 처리할 수 있을까?")
     void 어떻게_참여자가_없는_상황을_처리하는_코드를_중복하지_않고_처리할_수_있을까() {
         // TODO: 참여자가 없는 상황을 중복하지 않고 처리할 수 있는 코드를 작성해보세요.
+        // SOLUTION : 해당 책임을 지는 객체 내에서 그 연결 고리를 끊자 -> 예외를 던지자!
         class RacingGame {
             private final List<Car> participants;
 
@@ -131,7 +145,8 @@ public class PredictableCodeTest {
                         .average();
 
                 if (average.isEmpty()) {
-                    return Optional.empty();
+                    //return Optional.empty();
+                    throw new IllegalStateException("참가자 정보가 비어있습니다.");
                 }
                 return Optional.of((int) average.getAsDouble());
             }
@@ -139,9 +154,12 @@ public class PredictableCodeTest {
 
         final var racingGame = new RacingGame();
 
-        final var averagePosition = racingGame.averagePosition();
+        //final var averagePosition = racingGame.averagePosition();
 
-        assertThat(averagePosition).isEmpty();
+        //assertThat(averagePosition).isEmpty();
+        assertThatThrownBy(() -> racingGame.averagePosition())
+                .isInstanceOf(IllegalStateException.class)
+                .hasMessage("참가자 정보가 비어있습니다.");
     }
 
     /**
@@ -153,6 +171,9 @@ public class PredictableCodeTest {
     @Test
     @DisplayName("예외를 발생하여 명시적으로 처리하는 방법입니다.")
     void 예외를_발생하여_명시적으로_처리하는_방법입니다() {
+        //외부에서 처리하는 것이 적합할 경우 -> Optional 활용 : 다만, 응집도가 떨어지고(코드의 중복이 발생할 수 밖에 없다!), 책임을 위임한다는 단점을 지닌다!
+        //외부에서 처리할 필요가 없다면 -> 예외를 던지자 : 다만, 내부에서 예외를 처리하면 확장성이 떨어질 수 있다.
+        //상황에 따른 선택이 필요하다!
         class RacingGame {
             private final List<Car> participants;
 
@@ -197,18 +218,29 @@ public class PredictableCodeTest {
             private int position;
 
             // TODO: 자동차 이동과 조회를 같이 할 경우 어떠한 문제가 있을지 고민 후 개선해보세요.
-            int move(final int power) {
+            // PROBLEM : 조회만 하고 싶을 때도 값이 갱신되는 문제가 발생한다. 조회하는 값이 갱신 전인지 후인지 내부를 봐야만 알 수 있다.
+            // SOLUTION : 이동과 조회 메서드를 분리한다.
+            /*int move(final int power) {
                 if (power <= 4) {
                     return position;
                 }
 
                 return ++position;
+            }*/
+            void move(final int power) {
+                if (power > 4) position++;
+            }
+
+            int getPosition() {
+                return position;
             }
         }
 
         final var car = new Car();
 
-        final var position = car.move(5);
+        //final var position = car.move(5);
+        car.move(5);
+        final var position = car.getPosition();
 
         assertThat(position).isEqualTo(1);
     }
@@ -229,12 +261,15 @@ public class PredictableCodeTest {
             }
 
             // TODO: 자동차가 최대 위치에서 움직이지 않고 유지하는 코드는 어떠한 문제가 있을지 고민 후 개선해보세요.
+            // PROBLEM : 어떤 시점에 최대 위치에 도달했는지 알 수 없고, 더 이상 움직일 수 없음에도 불필요한 메서드 콜이 발생하게 된다.
+            // SOLUTION : 최대 위치에서 더 이상 움직일 수 없게 되었을 때 예외를 던진다.
             void move(final int power) {
                 if (power <= 4) {
                     return;
                 }
                 if (position >= 5) {
-                    return;
+                    //return;
+                    throw new IllegalStateException("자동차가 최대 위치에 도달하여 더 이상 움직일 수 없습니다.");
                 }
 
                 position++;
@@ -247,9 +282,12 @@ public class PredictableCodeTest {
 
         final var car = new Car(5);
 
-        car.move(5);
+        //car.move(5);
 
-        assertThat(car.getPosition()).isEqualTo(5);
+        //assertThat(car.getPosition()).isEqualTo(5);
+        assertThatThrownBy(() -> car.move(5))
+                .isInstanceOf(IllegalStateException.class)
+                .hasMessage("자동차가 최대 위치에 도달하여 더 이상 움직일 수 없습니다.");
     }
 
     /**
@@ -270,6 +308,13 @@ public class PredictableCodeTest {
 
             void move(final int power) {
                 // TODO: 파워가 4보다 작을 때 무시하는 코드는 어떠한 문제가 있을지 고민 후 개선해보세요.
+                // PROBLEM : 불필요한 조건문이 존재한다.
+                // SOLUTION : 반환값이 없는 메서드이기 때문에 4보다 클 경우에 갱신하는 조건만 있어도 충분하다.
+                //  -> 문제점이라고 보기 힘들 것 같다.
+                /*
+                 Note: 중요한 것은 의도다. 파워가 4보다 적을 때는 움직이지 않는 것이 의도된 설계다. 코드의 형태가 아닌 의도에 집중한다.
+                 */
+                // 생성자에서 validation 후에 생성을 하듯, 필터링 후 요구되는 작업을 한다고 생각해보자!
                 if (power <= 4) {
                     return;
                 }
@@ -297,30 +342,53 @@ public class PredictableCodeTest {
     @Test
     @DisplayName("문자열로 명령을 받는 것은 어떠한 문제가 있을지 고민 후 개선한다.")
     void 문자열로_명령을_받는_것은_어떠한_문제가_있을지_고민_후_개선한다() {
+        enum Command {
+            PLUS,
+            MINUS
+        }
+
         class Calculator {
-            private static final String PLUS = "PLUS";
-            private static final String MINUS = "MINUS";
+            /*private static final String PLUS = "PLUS";
+            private static final String MINUS = "MINUS";*/
 
             // TODO: 문자열로 명령을 받는 것은 어떠한 문제가 있을지 고민 후 개선해보세요.
+            // PROBLEM : 리터럴은 추적이 어렵다. 컴파일 에러로 문제를 잡을 수 없다. -> 타입 안정성이 보장되지 않는다.
+            // SOLUTION : enum을 활용하자.
             public static int calculate(
-                    final String command,
+                    //final String command,
+                    final Command command,
                     final int left,
                     final int right
             ) {
+                /*
                 if (PLUS.equals(command)) {
                     return left + right;
                 }
                 if (MINUS.equals(command)) {
                     return left - right;
                 }
+                */
+
+                if (command == Command.PLUS) {
+                    return left + right;
+                }
+                if (command == Command.MINUS) {
+                    return left - right;
+                }
 
                 throw new UnsupportedOperationException("지원하지 않는 명령입니다.");
             }
         }
-
+        /*
         assertAll(
                 () -> assertThat(Calculator.calculate("PLUS", 1, 2)).isEqualTo(3),
                 () -> assertThat(Calculator.calculate("MINUS", 1, 2)).isEqualTo(-1)
+        );
+        */
+
+        assertAll(
+                () -> assertThat(Calculator.calculate(Command.PLUS, 1, 2)).isEqualTo(3),
+                () -> assertThat(Calculator.calculate(Command.MINUS, 1, 2)).isEqualTo(-1)
         );
     }
 
@@ -359,7 +427,8 @@ public class PredictableCodeTest {
         }
 
         // TODO: 새로운 열거형이 추가되었을 때 해당 명령을 처리하는 코드를 놓치지 않을 수 있는 방법을 고민 후 개선해보세요.
-
+        // PROBLEM : 새로운 열거형이 추가되었을 때 해당 명령을 처리하는 코드를 놓친다면 버그를 유발할 수 있다.
+        // SOLUTION : 열거형 내에서 명령을 처리하도록 하자 -> 응집도를 높이자!
         assertAll(
                 () -> assertThat(Calculator.calculate(Command.PLUS, 1, 2)).isEqualTo(3),
                 () -> assertThat(Calculator.calculate(Command.MINUS, 1, 2)).isEqualTo(-1)
@@ -399,7 +468,8 @@ public class PredictableCodeTest {
         }
 
         // TODO: 더 빠른 시점에 해당 명령을 처리하는 코드를 놓치지 않을 수 있는 방법을 고민 후 개선해보세요.
-
+        // SOLUTION : 새로운 열거형을 선언하는 시점에 명령도 함께 구현할 수 있도록 캡슐화하자.
+        // 현재 런타임 시점에 잡는데, 컴파일 타임으로 당길 수 없을까?
         for (final Command command : Command.values()) {
             // Note: 런타임 시점에 해당 명령을 처리하는 코드를 놓치지 않을 수 있다.
             assertThatCode(() -> {
@@ -432,6 +502,8 @@ public class PredictableCodeTest {
                     case PLUS -> left + right;
                     case MINUS -> left - right;
                     case MULTIPLY -> left * right; // Note: 모든 열것값을 처리하지 않으면 컴파일 오류가 발생한다.
+                    //모든 열거값을 처리하지 않으면 아래와 같은 컴파일 에러 메시지를 띄운ㅏ.
+                    //'switch' expression does not cover all possible input values
                 };
             }
         }
@@ -453,6 +525,14 @@ public class PredictableCodeTest {
     @DisplayName("열거형이 해당 역할을 수행하도록 하는 것이 적합한지 충분한 고민을 하고 사용해야 합니다.")
     void 열거형이_해당_역할을_수행하도록_하는_것이_적합한지_충분한_고민을_하고_사용해야_합니다() {
         // Note: 열거형을 상수로 바라볼 것인가, 객체로 바라볼 것인가에 대한 고민이 필요하다. 고민이 부족하면 부작용이 커진다.
+        /**
+         * 열거형을 상수로 바라볼 것인가, 객체로 바라볼 것인가?
+         *
+         * 앞서, 내가 내린 SOLUTION들은 열거형을 객체로 바라본 것이다.
+         * 객체로 바라본다면 ? 응집도를 높일 수 있다. 혹은, 상수와 객체의 역할을 모두 수행하기 때문에 적절한 책임 분리가 이루어지지 않았다고 볼 수도 있다.
+         * 상수로 바라본다면 ? 확장에 취약할 수 있다. 앞서 살펴본 것처럼, 새로운 열거값이 추가될 때 함께 추가되어야 할 명령을 놓칠 수 있다. (해결 : 컴파일 타임 내 해결하자!)
+         * 어떤 기준으로 열거형을 상수/객체로 바라볼지 정해야 할 것 같다!
+         */
         enum Command {
             PLUS((left, right) -> left + right),
             MINUS((left, right) -> left - right),
