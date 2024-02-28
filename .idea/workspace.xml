@@ -4,10 +4,10 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="3c790837-1e96-496d-b7c5-42778307cee8" name="Changes" comment="test : 실수를 방지하는 코드 학습 테스트 수행">
+    <list default="true" id="3c790837-1e96-496d-b7c5-42778307cee8" name="Changes" comment="test : 예측 가능한 코드 학습 테스트 수행">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/clean-code/initial/src/test/java/woowacourse/ExceptionHandlingTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/clean-code/initial/src/test/java/woowacourse/ExceptionHandlingTest.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/clean-code/initial/src/test/java/woowacourse/goodcode/PredictableCodeTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/clean-code/initial/src/test/java/woowacourse/goodcode/PredictableCodeTest.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/clean-code/initial/src/test/java/woowacourse/goodcode/ReadableCodeTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/clean-code/initial/src/test/java/woowacourse/goodcode/ReadableCodeTest.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -86,7 +86,7 @@
       <recent name="$PROJECT_DIR$" />
     </key>
   </component>
-  <component name="RunManager" selected="Gradle.PredictableCodeTest.문자열로_명령을_받는_것은_어떠한_문제가_있을지_고민_후_개선한다">
+  <component name="RunManager" selected="Gradle.ReadableCodeTest.일관된_코드_스타일을_가져간다">
     <configuration name="PredictableCodeTest.문자열로_명령을_받는_것은_어떠한_문제가_있을지_고민_후_개선한다" type="GradleRunConfiguration" factoryName="Gradle" temporary="true">
       <ExternalSystemSettings>
         <option name="executionName" />
@@ -110,7 +110,7 @@
       <DebugAllEnabled>false</DebugAllEnabled>
       <method v="2" />
     </configuration>
-    <configuration name="PredictableCodeTest.어떻게_참여자가_없는_상황을_처리하는_코드를_중복하지_않고_처리할_수_있을까" type="GradleRunConfiguration" factoryName="Gradle" temporary="true">
+    <configuration name="ReadableCodeTest.일관된_코드_스타일을_가져간다" type="GradleRunConfiguration" factoryName="Gradle" temporary="true">
       <ExternalSystemSettings>
         <option name="executionName" />
         <option name="externalProjectPath" value="$PROJECT_DIR$" />
@@ -123,7 +123,7 @@
           <list>
             <option value=":clean-code:initial:test" />
             <option value="--tests" />
-            <option value="&quot;woowacourse.goodcode.PredictableCodeTest.어떻게_참여자가_없는_상황을_처리하는_코드를_중복하지_않고_처리할_수_있을까&quot;" />
+            <option value="&quot;woowacourse.goodcode.ReadableCodeTest.일관된_코드_스타일을_가져간다&quot;" />
           </list>
         </option>
         <option name="vmOptions" />
@@ -133,7 +133,7 @@
       <DebugAllEnabled>false</DebugAllEnabled>
       <method v="2" />
     </configuration>
-    <configuration name="PredictableCodeTest.자동차_이동과_조회를_같이_할_경우_어떠한_문제가_있을지_고민_후_개선한다" type="GradleRunConfiguration" factoryName="Gradle" temporary="true">
+    <configuration name="ReadableCodeTest.어떻게_의도를_전달할_수_있을까" type="GradleRunConfiguration" factoryName="Gradle" temporary="true">
       <ExternalSystemSettings>
         <option name="executionName" />
         <option name="externalProjectPath" value="$PROJECT_DIR$" />
@@ -146,7 +146,7 @@
           <list>
             <option value=":clean-code:initial:test" />
             <option value="--tests" />
-            <option value="&quot;woowacourse.goodcode.PredictableCodeTest.자동차_이동과_조회를_같이_할_경우_어떠한_문제가_있을지_고민_후_개선한다&quot;" />
+            <option value="&quot;woowacourse.goodcode.ReadableCodeTest.어떻게_의도를_전달할_수_있을까&quot;" />
           </list>
         </option>
         <option name="vmOptions" />
@@ -156,7 +156,7 @@
       <DebugAllEnabled>false</DebugAllEnabled>
       <method v="2" />
     </configuration>
-    <configuration name="PredictableCodeTest.자동차가_최대_위치에서_움직이지_않고_유지하는_코드는_어떠한_문제가_있을지_고민_후_개선한다" type="GradleRunConfiguration" factoryName="Gradle" temporary="true">
+    <configuration name="ReadableCodeTest.코드를_통해_객체의_역할을_명확하게_드러내는_방법은_없을까" type="GradleRunConfiguration" factoryName="Gradle" temporary="true">
       <ExternalSystemSettings>
         <option name="executionName" />
         <option name="externalProjectPath" value="$PROJECT_DIR$" />
@@ -169,7 +169,7 @@
           <list>
             <option value=":clean-code:initial:test" />
             <option value="--tests" />
-            <option value="&quot;woowacourse.goodcode.PredictableCodeTest.자동차가_최대_위치에서_움직이지_않고_유지하는_코드는_어떠한_문제가_있을지_고민_후_개선한다&quot;" />
+            <option value="&quot;woowacourse.goodcode.ReadableCodeTest.코드를_통해_객체의_역할을_명확하게_드러내는_방법은_없을까&quot;" />
           </list>
         </option>
         <option name="vmOptions" />
@@ -179,7 +179,7 @@
       <DebugAllEnabled>false</DebugAllEnabled>
       <method v="2" />
     </configuration>
-    <configuration name="PredictableCodeTest.null을_사용하지_않고_의도를_전달하는_방법은_무엇일까" type="GradleRunConfiguration" factoryName="Gradle" temporary="true">
+    <configuration name="ReadableCodeTest.주석을_사용하지_않고도_의도를_전달할_수_있는_방법은_없을까" type="GradleRunConfiguration" factoryName="Gradle" temporary="true">
       <ExternalSystemSettings>
         <option name="executionName" />
         <option name="externalProjectPath" value="$PROJECT_DIR$" />
@@ -192,7 +192,7 @@
           <list>
             <option value=":clean-code:initial:test" />
             <option value="--tests" />
-            <option value="&quot;woowacourse.goodcode.PredictableCodeTest.null을_사용하지_않고_의도를_전달하는_방법은_무엇일까&quot;" />
+            <option value="&quot;woowacourse.goodcode.ReadableCodeTest.주석을_사용하지_않고도_의도를_전달할_수_있는_방법은_없을까&quot;" />
           </list>
         </option>
         <option name="vmOptions" />
@@ -204,11 +204,11 @@
     </configuration>
     <recent_temporary>
       <list>
+        <item itemvalue="Gradle.ReadableCodeTest.일관된_코드_스타일을_가져간다" />
+        <item itemvalue="Gradle.ReadableCodeTest.코드를_통해_객체의_역할을_명확하게_드러내는_방법은_없을까" />
+        <item itemvalue="Gradle.ReadableCodeTest.주석을_사용하지_않고도_의도를_전달할_수_있는_방법은_없을까" />
+        <item itemvalue="Gradle.ReadableCodeTest.어떻게_의도를_전달할_수_있을까" />
         <item itemvalue="Gradle.PredictableCodeTest.문자열로_명령을_받는_것은_어떠한_문제가_있을지_고민_후_개선한다" />
-        <item itemvalue="Gradle.PredictableCodeTest.자동차가_최대_위치에서_움직이지_않고_유지하는_코드는_어떠한_문제가_있을지_고민_후_개선한다" />
-        <item itemvalue="Gradle.PredictableCodeTest.자동차_이동과_조회를_같이_할_경우_어떠한_문제가_있을지_고민_후_개선한다" />
-        <item itemvalue="Gradle.PredictableCodeTest.어떻게_참여자가_없는_상황을_처리하는_코드를_중복하지_않고_처리할_수_있을까" />
-        <item itemvalue="Gradle.PredictableCodeTest.null을_사용하지_않고_의도를_전달하는_방법은_무엇일까" />
       </list>
     </recent_temporary>
   </component>
@@ -242,7 +242,8 @@
       <workItem from="1708934592812" duration="10000" />
       <workItem from="1708934677785" duration="433000" />
       <workItem from="1708950122096" duration="2021000" />
-      <workItem from="1708992224192" duration="4140000" />
+      <workItem from="1708992224192" duration="6131000" />
+      <workItem from="1709122741337" duration="1507000" />
     </task>
     <task id="LOCAL-00001" summary="feat(test): junit, assertj 학습 테스트 추가">
       <option name="closed" value="true" />
@@ -289,7 +290,14 @@
       <option name="project" value="LOCAL" />
       <updated>1708935058502</updated>
     </task>
-    <option name="localTasksCounter" value="7" />
+    <task id="LOCAL-00007" summary="test : 예측 가능한 코드 학습 테스트 수행">
+      <created>1708999356979</created>
+      <option name="number" value="00007" />
+      <option name="presentableId" value="LOCAL-00007" />
+      <option name="project" value="LOCAL" />
+      <updated>1708999356979</updated>
+    </task>
+    <option name="localTasksCounter" value="8" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -313,7 +321,8 @@
     <MESSAGE value="test : Junit5 학습 테스트 수행" />
     <MESSAGE value="test : AssertJ 학습 테스트 수행" />
     <MESSAGE value="test : 실수를 방지하는 코드 학습 테스트 수행" />
-    <option name="LAST_COMMIT_MESSAGE" value="test : 실수를 방지하는 코드 학습 테스트 수행" />
+    <MESSAGE value="test : 예측 가능한 코드 학습 테스트 수행" />
+    <option name="LAST_COMMIT_MESSAGE" value="test : 예측 가능한 코드 학습 테스트 수행" />
   </component>
   <component name="XSLT-Support.FileAssociations.UIState">
     <expand />

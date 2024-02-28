@@ -4,12 +4,7 @@ import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Nested;
 import org.junit.jupiter.api.Test;
 
-import java.util.Arrays;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Map;
-import java.util.Objects;
-import java.util.Set;
+import java.util.*;
 
 import static java.util.stream.Collectors.toSet;
 import static org.assertj.core.api.Assertions.assertThat;
@@ -35,22 +30,24 @@ public class ReadableCodeTest {
     @DisplayName("어떻게 의도를 전달할 수 있을까?")
     void 어떻게_의도를_전달할_수_있을까() {
         // TODO: 자동차를 움직이고 위치가 변경된다는 의도를 드러낼 수 있는 코드를 작성해보세요.
+        // SOLUTION : 적절한 변수명을 사용한다.
         class Car {
-            private int p = 0;
+            //private int p = 0;
+            private int power = 0;
 
             void forward() {
-                if (p > 5) {
+                if (power > 5) {
                     throw new IllegalStateException("최대 5까지만 움직일 수 있습니다.");
                 }
 
-                p += 1;
+                power += 1;
             }
         }
 
         final var car = new Car();
 
         car.forward();
-        assertThat(car.p).isEqualTo(1);
+        assertThat(car.power).isEqualTo(1);
     }
 
     /**
@@ -62,23 +59,25 @@ public class ReadableCodeTest {
     @DisplayName("주석을 사용하지 않고도 의도를 전달할 수 있는 방법은 없을까?")
     void 주석을_사용하지_않고도_의도를_전달할_수_있는_방법은_없을까() {
         // TODO: 자동차를 움직이고 위치가 변경된다는 의도를 드러낼 수 있는 코드를 작성해보세요.
+        // SOLUTION : 변수명을 적절하게 바꾸자.
         class Car {
             // 자동차 위치
-            private int p = 0;
+            //private int p = 0;
+            private int power = 0;
 
             void forward() {
-                if (p > 5) {
+                if (power > 5) {
                     throw new IllegalStateException("최대 5까지만 움직일 수 있습니다.");
                 }
 
-                p += 1;
+                power += 1;
             }
         }
 
         final var car = new Car();
 
         car.forward();
-        assertThat(car.p).isEqualTo(1);
+        assertThat(car.power).isEqualTo(1);
     }
 
     /**
@@ -92,22 +91,48 @@ public class ReadableCodeTest {
     @DisplayName("코드를 통해 객체의 역할을 명확하게 드러내는 방법은 없을까")
     void 코드를_통해_객체의_역할을_명확하게_드러내는_방법은_없을까() {
         // TODO: 객체의 역할을 명확하게 드러내는 코드를 작성해보세요.
-        class Car {
-            private int position;
+        // SOLUTION : 위치에 대한 책임을 분리하자.
+        class Position {
+            private final int value;
 
-            void forward() {
+            public Position() {
+                this(0);
+            }
+
+            public Position(final int value) {
+                if (value > 5) {
+                    throw new IllegalStateException("최대 5까지만 움직일 수 있습니다.");
+                }
+
+                this.value = value;
+            }
+
+            Position forward() {
+                return new Position(value + 1);
+            }
+        }
+
+        class Car {
+            //private int position;
+            private Position position = new Position();
+
+            /*void forward() {
                 if (position > 5) {
                     throw new IllegalStateException("최대 5까지만 움직일 수 있습니다.");
                 }
 
                 position += 1;
+            }*/
+            void forward() {
+                position = position.forward();
             }
         }
 
         final var car = new Car();
 
         car.forward();
-        assertThat(car.position).isEqualTo(1);
+        //assertThat(car.position).isEqualTo(1);
+        assertThat(car.position.value).isEqualTo(1);
     }
 
     /**
@@ -179,7 +204,7 @@ public class ReadableCodeTest {
             private String name;
             private int position;
 
-            public String getName()
+            /*public String getName()
             {
                 return name;
             }
@@ -195,6 +220,21 @@ public class ReadableCodeTest {
             void minusPosition()
             {
                 position--;
+            }*/
+            void Forward() {
+                position += 1;
+            }
+
+            void backward() {
+                position -= 1;
+            }
+
+            public String getName() {
+                return name;
+            }
+
+            public int position() {
+                return position;
             }
         }
         // @formatter:on
@@ -250,7 +290,7 @@ public class ReadableCodeTest {
     @DisplayName("어떻게 추상화하여 메서드를 작게 만들 수 있을까?")
     void 어떻게_추상화하여_메서드를_작게_만들_수_있을까() {
         // TODO: 역할을 적절히 추상화하여 메서드를 작게 만들어보세요. 메서드의 시그니처는 변경하지 않습니다.
-        class LottoGame {
+        /*class LottoGame {
             int calculatePrize(
                     final List<Integer> numbers,
                     final List<Integer> winningNumbers
@@ -289,8 +329,58 @@ public class ReadableCodeTest {
                     default -> 0;
                 };
             }
-        }
+        }*/
+        class LottoGame {
+            int calculatePrize(
+                    final List<Integer> numbers,
+                    final List<Integer> winningNumbers
+            ) {
+                throwIfInvalidNumbers(numbers);
+                throwIfInvalidNumbers(winningNumbers);
+                throwIfInvalidNumberCount(numbers);
+                throwIfInvalidNumberCount(winningNumbers);
 
+                int count = countMatchNumber(numbers, winningNumbers);
+
+                return calculatePrize(count);
+            }
+
+            private void throwIfInvalidNumbers(final List<Integer> numbers) {
+                for (int number : numbers) {
+                    if (number < 1 || number > 45) {
+                        throw new IllegalArgumentException("로또 번호는 1부터 45까지의 숫자여야 합니다.");
+                    }
+                }
+            }
+
+            private void throwIfInvalidNumberCount(final List<Integer> numbers) {
+                if (new HashSet<>(numbers).size() != 6) {
+                    throw new IllegalArgumentException("로또 번호는 6개여야 합니다.");
+                }
+            }
+
+            private int countMatchNumber(final List<Integer> numbers, final List<Integer> winningNumbers) {
+                int count = 0;
+                for (int number : numbers) {
+                    for (int winningNumber : winningNumbers) {
+                        if (number == winningNumber) {
+                            count++;
+                        }
+                    }
+                }
+                return count;
+            }
+
+            private int calculatePrize(final int count) {
+                return switch (count) {
+                    case 6 -> 1_000_000_000;
+                    case 5 -> 50_000_000;
+                    case 4 -> 500_000;
+                    case 3 -> 5_000;
+                    default -> 0;
+                };
+            }
+        }
         final var lottoGame = new LottoGame();
 
         assertAll(
@@ -313,6 +403,8 @@ public class ReadableCodeTest {
     @DisplayName("어떻게 추상화하여 객체의 역할을 명확하게 드러낼 수 있을까?")
     void 어떻게_추상화하여_객체의_역할을_명확하게_드러낼_수_있을까() {
         // TODO: 역할을 적절히 추상화하여 클래스를 작게 만들어보세요. 시작점 메서드의 시그니처는 변경하지 않습니다.
+        // SOLUTION : LottoNumber, Lotto, LottoRank, LottoGame으로 클래스 분리하자.
+        // 하위 테스트 참고
         class LottoGame {
             int calculatePrize(
                     final List<Integer> numbers,
@@ -508,6 +600,7 @@ public class ReadableCodeTest {
     @DisplayName("어떻게 매개변수의 의미를 전달할 수 있을까?")
     void 어떻게_매개변수의_의미를_전달할_수_있을까() {
         // TODO: Crew 클래스를 확인하지 않고 매개변수의 의미를 전달할 수 있는 코드를 작성해보세요.
+        // SOLUTION : 일급 컬렉션을 분리하자! 아직 각 컬렉션의 의미하는 바를 모르니 다음 테스트에서 보자.
         final var crew = new Crew(
                 "Neo",
                 Set.of("쌈밥", "김치찌개", "탕수육", "비빔밥"),
@@ -534,11 +627,19 @@ public class ReadableCodeTest {
          */
 
         // TODO: Crew 클래스를 확인하지 않고 매개변수의 의미를 전달할 수 있는 코드를 작성해보세요.
+        // SOLUTION : 일급 컬렉션으로 변경하자.
         final var crew = new Crew(
                 /*name*/ "Neo",
                 /*likeMenuItems*/ Set.of("쌈밥", "김치찌개", "탕수육", "비빔밥"),
                 /*dislikeMenuItems*/ Set.of("샐러드", "파인애플 볶음밥", "미소시루", "하이라이스")
         );
+        /*class LikeMenuItems{
+            private final Set<String> items = Set.of("쌈밥", "김치찌개", "탕수육", "비빔밥");
+        }
+
+        class DisLikeMenuItems{
+            private final Set<String> items = Set.of("샐러드", "파인애플 볶음밥", "미소시루", "하이라이스");
+        }*/
 
         assertThat(crew.name()).isEqualTo("Neo");
     }
@@ -554,6 +655,7 @@ public class ReadableCodeTest {
     @DisplayName("매개변수를 묶어 의미를 전달할 수 있는 방법은 없을까?")
     void 매개변수를_묶어_의미를_전달할_수_있는_방법은_없을까() {
         // TODO: 매개변수의 의미를 묶어서 전달할 수 있는 코드를 작성해보세요.
+        // SOLUTION : 객체를 분리하자...?
         class Builder {
             private String name;
             private Set<String> likeMenuItems;
@@ -687,14 +789,16 @@ public class ReadableCodeTest {
 
             public Menu(final List<String> menuItems) {
                 // TODO: Collection API를 사용하여 코드를 재사용하고 의도를 파악하기 쉽게 만들어보세요.
-                for (int i = 0; i < menuItems.size(); i++) {
+                /*for (int i = 0; i < menuItems.size(); i++) {
                     for (int j = 0; j < i; j++) {
                         if (menuItems.get(i).equals(menuItems.get(j))) {
                             throw new IllegalArgumentException("중복된 메뉴가 있습니다.");
                         }
                     }
+                }*/
+                if (menuItems.size() != menuItems.stream().distinct().count()) {
+                    throw new IllegalArgumentException("중복된 메뉴가 있습니다.");
                 }
-
                 this.menuItems = menuItems;
             }
         }
@@ -714,21 +818,29 @@ public class ReadableCodeTest {
     @DisplayName("객체 자체로 의미를 전달할 수 있는 방법은 없을까?")
     void 객체_자체로_의미를_전달할_수_있는_방법은_없을까() {
         class Menu {
-            private final List<String> menuItems;
+            //private final List<String> menuItems;
+            private final Set<String> menuItems;
 
             // TODO: 객체 자체로 의미를 전달할 수 있도록 코드를 작성해보세요.
-            public Menu(final List<String> menuItems) {
+            // SOLUTION : 중복을 허용하지 않는 자료구조, Set을 사용하자.
+            /*public Menu(final List<String> menuItems) {
                 if (menuItems.size() != menuItems.stream().distinct().count()) {
                     throw new IllegalArgumentException("중복된 메뉴가 있습니다.");
                 }
 
                 this.menuItems = menuItems;
+            }*/
+            public Menu(final Set<String> menuItems) {
+                this.menuItems = menuItems;
             }
         }
 
-        assertThatThrownBy(() -> {
+       /*assertThatThrownBy(() -> {
             new Menu(List.of("쌈밥", "김치찌개", "쌈밥", "비빔밥"));
-        }).hasMessage("중복된 메뉴가 있습니다.");
+        }).hasMessage("중복된 메뉴가 있습니다.");*/
+        assertThatCode(() -> {
+            new Menu(Set.of("쌈밥", "김치찌개", "비빔밥"));
+        }).doesNotThrowAnyException();
     }
 
     /**
@@ -772,12 +884,13 @@ public class ReadableCodeTest {
 
             public int getPrice(final String menuName) {
                 // TODO: API에 매몰되어 과하게 사용하여 생긴 코드입니다. 간단한 코드로 리팩토링해보세요.
-                return menu.entrySet()
+                /*return menu.entrySet()
                         .stream()
                         .filter(e -> e.getKey().equals(menuName))
                         .map(Map.Entry::getValue)
                         .findFirst()
-                        .orElse(0);
+                        .orElse(0);*/
+                return menu.getOrDefault(menuName, 0);
             }
         }
         final var menu = new Menu(Map.of(
