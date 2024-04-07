@@ -32,6 +32,7 @@ public class PredictableCodeTest {
     @DisplayName("어떻게 매번 -1를 체크하지 않도록 할 수 있을까?")
     void 어떻게_매번_값을_체크하지_않도록_할_수_있을까() {
         // TODO: 매번 -1을 체크하지 않고 참여자가 없다는 것을 명시적으로 표현할 수 있는 코드를 작성해보세요.
+        // QUESTION : -1이 왜 안좋지?
         // SOLUTION : null을 반환하여 의도를 전달하자.
         class RacingGame {
             private static final int NO_PARTICIPANT = -1;
@@ -78,6 +79,7 @@ public class PredictableCodeTest {
     @DisplayName("null을 사용하지 않고 의도를 전달하는 방법은 무엇일까?")
     void null을_사용하지_않고_의도를_전달하는_방법은_무엇일까() {
         // TODO: null을 사용하지 않고 참여자가 없다는 것을 명시적으로 표현할 수 있는 코드를 작성해보세요.
+        // QUESTION : null이 왜 안 좋지
         // SOLUTION : Optional의 empty() 메서드를 활용하여 비어있는 인스턴스임을 알리자.
         class RacingGame {
             private final List<Car> participants;

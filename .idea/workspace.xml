@@ -4,9 +4,10 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="3c790837-1e96-496d-b7c5-42778307cee8" name="Changes" comment="test : 예측 가능한 코드 학습 테스트 수행">
+    <list default="true" id="3c790837-1e96-496d-b7c5-42778307cee8" name="Changes" comment="test : 좋은 예외 처리 학습 테스트 수행">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/clean-code/initial/src/test/java/woowacourse/ExceptionHandlingTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/clean-code/initial/src/test/java/woowacourse/ExceptionHandlingTest.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/clean-code/initial/src/test/java/woowacourse/goodcode/PredictableCodeTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/clean-code/initial/src/test/java/woowacourse/goodcode/PredictableCodeTest.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/java-language/initial/src/test/java/woowacourse/FunctionalProgrammingTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/java-language/initial/src/test/java/woowacourse/FunctionalProgrammingTest.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -67,7 +68,7 @@
     &quot;git-widget-placeholder&quot;: &quot;main&quot;,
     &quot;jdk.selected.JAVA_MODULE&quot;: &quot;corretto-17&quot;,
     &quot;kotlin-language-version-configured&quot;: &quot;true&quot;,
-    &quot;last_opened_file_path&quot;: &quot;C:/Users/2001y/Desktop/linirinilinrin/DEV/waldreg-api&quot;,
+    &quot;last_opened_file_path&quot;: &quot;C:/Users/2001y/Desktop/linirinilinrin/DEV/chess&quot;,
     &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
     &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
     &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
@@ -85,8 +86,8 @@
       <recent name="$PROJECT_DIR$" />
     </key>
   </component>
-  <component name="RunManager" selected="Gradle.UserTest.외부에서_쉽게_예외를_구분할_수_있도록_하는_방법은_없을까">
-    <configuration name="SyntaxTest" type="GradleRunConfiguration" factoryName="Gradle" temporary="true">
+  <component name="RunManager" selected="Gradle.LibraryTest.Optional">
+    <configuration name="LibraryTest.Consumer" type="GradleRunConfiguration" factoryName="Gradle" temporary="true">
       <ExternalSystemSettings>
         <option name="executionName" />
         <option name="externalProjectPath" value="$PROJECT_DIR$" />
@@ -97,9 +98,9 @@
         </option>
         <option name="taskNames">
           <list>
-            <option value=":clean-code:initial:test" />
+            <option value=":java-language:initial:test" />
             <option value="--tests" />
-            <option value="&quot;woowacourse.ExceptionHandlingTest$SyntaxTest&quot;" />
+            <option value="&quot;woowacourse.FunctionalProgrammingTest$LibraryTest.Consumer&quot;" />
           </list>
         </option>
         <option name="vmOptions" />
@@ -109,7 +110,7 @@
       <DebugAllEnabled>false</DebugAllEnabled>
       <method v="2" />
     </configuration>
-    <configuration name="UserTest.유저의_이름의_최대_길이가_5자로_제한되어_있을_때_예외_처리를_어떻게_하는_것이_좋을까" type="GradleRunConfiguration" factoryName="Gradle" temporary="true">
+    <configuration name="LibraryTest.Function" type="GradleRunConfiguration" factoryName="Gradle" temporary="true">
       <ExternalSystemSettings>
         <option name="executionName" />
         <option name="externalProjectPath" value="$PROJECT_DIR$" />
@@ -120,9 +121,9 @@
         </option>
         <option name="taskNames">
           <list>
-            <option value=":clean-code:initial:test" />
+            <option value=":java-language:initial:test" />
             <option value="--tests" />
-            <option value="&quot;woowacourse.ExceptionHandlingTest$GoodExceptionHandling$UserTest.유저의_이름의_최대_길이가_5자로_제한되어_있을_때_예외_처리를_어떻게_하는_것이_좋을까&quot;" />
+            <option value="&quot;woowacourse.FunctionalProgrammingTest$LibraryTest.Function&quot;" />
           </list>
         </option>
         <option name="vmOptions" />
@@ -132,7 +133,7 @@
       <DebugAllEnabled>false</DebugAllEnabled>
       <method v="2" />
     </configuration>
-    <configuration name="UserTest.예외_처리를_강제하지_않는_코드를_어떻게_작성할_수_있을까" type="GradleRunConfiguration" factoryName="Gradle" temporary="true">
+    <configuration name="LibraryTest.Optional" type="GradleRunConfiguration" factoryName="Gradle" temporary="true">
       <ExternalSystemSettings>
         <option name="executionName" />
         <option name="externalProjectPath" value="$PROJECT_DIR$" />
@@ -143,9 +144,9 @@
         </option>
         <option name="taskNames">
           <list>
-            <option value=":clean-code:initial:test" />
+            <option value=":java-language:initial:test" />
             <option value="--tests" />
-            <option value="&quot;woowacourse.ExceptionHandlingTest$GoodExceptionHandling$UserTest.예외_처리를_강제하지_않는_코드를_어떻게_작성할_수_있을까&quot;" />
+            <option value="&quot;woowacourse.FunctionalProgrammingTest$LibraryTest.Optional&quot;" />
           </list>
         </option>
         <option name="vmOptions" />
@@ -155,7 +156,7 @@
       <DebugAllEnabled>false</DebugAllEnabled>
       <method v="2" />
     </configuration>
-    <configuration name="UserTest.외부에서_쉽게_예외를_구분할_수_있도록_하는_방법은_없을까" type="GradleRunConfiguration" factoryName="Gradle" temporary="true">
+    <configuration name="SyntaxTest.User의_나이를_기준으로_정렬한다" type="GradleRunConfiguration" factoryName="Gradle" temporary="true">
       <ExternalSystemSettings>
         <option name="executionName" />
         <option name="externalProjectPath" value="$PROJECT_DIR$" />
@@ -166,9 +167,9 @@
         </option>
         <option name="taskNames">
           <list>
-            <option value=":clean-code:initial:test" />
+            <option value=":java-language:initial:test" />
             <option value="--tests" />
-            <option value="&quot;woowacourse.ExceptionHandlingTest$GoodExceptionHandling$UserTest.외부에서_쉽게_예외를_구분할_수_있도록_하는_방법은_없을까&quot;" />
+            <option value="&quot;woowacourse.FunctionalProgrammingTest$SyntaxTest.User의_나이를_기준으로_정렬한다&quot;" />
           </list>
         </option>
         <option name="vmOptions" />
@@ -178,7 +179,7 @@
       <DebugAllEnabled>false</DebugAllEnabled>
       <method v="2" />
     </configuration>
-    <configuration name="UserTest.유저_생성_시_여러_예외_상황이_발생할_수_있을_때_어떻게_예외_처리를_하는_것이_좋을까" type="GradleRunConfiguration" factoryName="Gradle" temporary="true">
+    <configuration name="VendingMachineTest.의도된_회피인지_확인할_수_있도록_의도를_나타내는_방법은_없을까" type="GradleRunConfiguration" factoryName="Gradle" temporary="true">
       <ExternalSystemSettings>
         <option name="executionName" />
         <option name="externalProjectPath" value="$PROJECT_DIR$" />
@@ -191,7 +192,7 @@
           <list>
             <option value=":clean-code:initial:test" />
             <option value="--tests" />
-            <option value="&quot;woowacourse.ExceptionHandlingTest$GoodExceptionHandling$UserTest.유저_생성_시_여러_예외_상황이_발생할_수_있을_때_어떻게_예외_처리를_하는_것이_좋을까&quot;" />
+            <option value="&quot;woowacourse.ExceptionHandlingTest$GoodExceptionHandling$VendingMachineTest.의도된_회피인지_확인할_수_있도록_의도를_나타내는_방법은_없을까&quot;" />
           </list>
         </option>
         <option name="vmOptions" />
@@ -203,11 +204,11 @@
     </configuration>
     <recent_temporary>
       <list>
-        <item itemvalue="Gradle.UserTest.외부에서_쉽게_예외를_구분할_수_있도록_하는_방법은_없을까" />
-        <item itemvalue="Gradle.UserTest.유저_생성_시_여러_예외_상황이_발생할_수_있을_때_어떻게_예외_처리를_하는_것이_좋을까" />
-        <item itemvalue="Gradle.UserTest.예외_처리를_강제하지_않는_코드를_어떻게_작성할_수_있을까" />
-        <item itemvalue="Gradle.UserTest.유저의_이름의_최대_길이가_5자로_제한되어_있을_때_예외_처리를_어떻게_하는_것이_좋을까" />
-        <item itemvalue="Gradle.SyntaxTest" />
+        <item itemvalue="Gradle.LibraryTest.Optional" />
+        <item itemvalue="Gradle.LibraryTest.Consumer" />
+        <item itemvalue="Gradle.LibraryTest.Function" />
+        <item itemvalue="Gradle.SyntaxTest.User의_나이를_기준으로_정렬한다" />
+        <item itemvalue="Gradle.VendingMachineTest.의도된_회피인지_확인할_수_있도록_의도를_나타내는_방법은_없을까" />
       </list>
     </recent_temporary>
   </component>
@@ -244,7 +245,22 @@
       <workItem from="1708992224192" duration="6131000" />
       <workItem from="1709122741337" duration="1978000" />
       <workItem from="1709187113444" duration="1302000" />
-      <workItem from="1709192498240" duration="2657000" />
+      <workItem from="1709192498240" duration="3168000" />
+      <workItem from="1709901489050" duration="1168000" />
+      <workItem from="1710056793558" duration="1324000" />
+      <workItem from="1710128559941" duration="597000" />
+      <workItem from="1710200600840" duration="3701000" />
+      <workItem from="1710287016664" duration="1193000" />
+      <workItem from="1710372323645" duration="596000" />
+      <workItem from="1710420390870" duration="303000" />
+      <workItem from="1710461974068" duration="2925000" />
+      <workItem from="1710564236761" duration="579000" />
+      <workItem from="1710659891725" duration="1244000" />
+      <workItem from="1710679869280" duration="1192000" />
+      <workItem from="1710742477693" duration="599000" />
+      <workItem from="1710745998499" duration="594000" />
+      <workItem from="1710805757019" duration="1715000" />
+      <workItem from="1712477814202" duration="4999000" />
     </task>
     <task id="LOCAL-00001" summary="feat(test): junit, assertj 학습 테스트 추가">
       <option name="closed" value="true" />
@@ -298,7 +314,14 @@
       <option name="project" value="LOCAL" />
       <updated>1708999356979</updated>
     </task>
-    <option name="localTasksCounter" value="8" />
+    <task id="LOCAL-00008" summary="test : 좋은 예외 처리 학습 테스트 수행">
+      <created>1709195767219</created>
+      <option name="number" value="00008" />
+      <option name="presentableId" value="LOCAL-00008" />
+      <option name="project" value="LOCAL" />
+      <updated>1709195767219</updated>
+    </task>
+    <option name="localTasksCounter" value="9" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -323,7 +346,8 @@
     <MESSAGE value="test : AssertJ 학습 테스트 수행" />
     <MESSAGE value="test : 실수를 방지하는 코드 학습 테스트 수행" />
     <MESSAGE value="test : 예측 가능한 코드 학습 테스트 수행" />
-    <option name="LAST_COMMIT_MESSAGE" value="test : 예측 가능한 코드 학습 테스트 수행" />
+    <MESSAGE value="test : 좋은 예외 처리 학습 테스트 수행" />
+    <option name="LAST_COMMIT_MESSAGE" value="test : 좋은 예외 처리 학습 테스트 수행" />
   </component>
   <component name="XSLT-Support.FileAssociations.UIState">
     <expand />
